@@ -1,0 +1,18 @@
+{
+  "startPages": ["https://en.wikipedia.org/wiki/Java_(programming_language)"],
+  "ignoredUrls": [
+    ".*#.*",
+    ".*\\?.*",
+    ".*\\.pdf$",
+    ".*\\.jpg$",
+    ".*\\.png$"
+  ],
+  "ignoredWords": ["^.$", "^..$"],
+  "parallelism": 4,
+  "implementationOverride": "",
+  "maxDepth": 2,
+  "timeoutSeconds": 10,
+  "popularWordCount": 10,
+  "profileOutputPath": "profile.txt",
+  "resultPath": "result.json"
+}
