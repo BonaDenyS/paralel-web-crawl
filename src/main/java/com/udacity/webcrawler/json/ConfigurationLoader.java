@@ -1,5 +1,6 @@
 package com.udacity.webcrawler.json;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -25,6 +26,8 @@ public final class ConfigurationLoader {
   public static CrawlerConfiguration read(Reader reader) throws IOException {
     Objects.requireNonNull(reader);
     ObjectMapper mapper = new ObjectMapper();
+    // Do not let Jackson close a caller-supplied reader.
+    mapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
     return mapper.readValue(reader, CrawlerConfiguration.class);
   }
 }

@@ -62,7 +62,9 @@ public class ConfigurationLoaderTest {
 
   @Test
   public void testIgnoredUrlsArePatterns() throws Exception {
-    String json = "{\"ignoredUrls\": [\".*#.*\", \"https://.*\\.pdf\"]}";
+    // In JSON text "\\." means a literal backslash then dot (valid regex escape for dot).
+    // Java source needs four backslashes to produce two in the JSON text.
+    String json = "{\"ignoredUrls\": [\".*#.*\", \"https://.*\\\\.pdf\"]}";
     CrawlerConfiguration config = ConfigurationLoader.read(new StringReader(json));
     assertEquals(2, config.getIgnoredUrls().size());
     assertTrue(config.getIgnoredUrls().get(0).matcher("https://example.com#section").matches());

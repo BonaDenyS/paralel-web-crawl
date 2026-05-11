@@ -38,7 +38,7 @@ final class PageParserImpl implements PageParser {
       List<String> links = doc.select("a[href]")
           .stream()
           .map(a -> a.absUrl("href"))
-          .filter(link -> !link.isEmpty())
+          .filter(link -> link.startsWith("http://") || link.startsWith("https://"))
           .collect(Collectors.toList());
 
       return new Result.Builder()
