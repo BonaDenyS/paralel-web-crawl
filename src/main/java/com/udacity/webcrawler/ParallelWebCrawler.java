@@ -7,8 +7,6 @@ import com.udacity.webcrawler.profiler.Profiled;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,7 +53,7 @@ public final class ParallelWebCrawler implements WebCrawler {
   public CrawlResult crawl(List<String> urls) {
     Instant deadline = clock.instant().plus(timeout);
     ConcurrentMap<String, Integer> counts = new ConcurrentHashMap<>();
-    Set<String> visitedUrls = Collections.synchronizedSet(new HashSet<>());
+    Set<String> visitedUrls = ConcurrentHashMap.newKeySet();
 
     // Fork all start URLs as parallel subtasks inside the pool
     pool.invoke(new RecursiveAction() {

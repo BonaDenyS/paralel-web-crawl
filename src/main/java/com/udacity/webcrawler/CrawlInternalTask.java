@@ -51,7 +51,7 @@ public final class CrawlInternalTask extends RecursiveAction {
     if (ignoredUrls.stream().anyMatch(p -> p.matcher(url).matches())) {
       return;
     }
-    // visitedUrls is a Collections.synchronizedSet — add() is atomic
+    // ConcurrentHashMap.newKeySet() — add() is lock-free and atomic
     if (!visitedUrls.add(url)) {
       return;
     }
